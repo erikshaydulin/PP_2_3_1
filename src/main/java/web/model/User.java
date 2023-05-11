@@ -11,10 +11,10 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "username")
+    @Column(name = "surname", nullable = false, length = 50)
     private String surname;
 
     @Column(name = "department")
