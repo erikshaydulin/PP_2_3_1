@@ -57,15 +57,16 @@
         display: block;
     }
 
-    .update-button {
+    .update-button, .delete-button {
         background-color: #333;
         border: none;
         padding: 0.5em 1em;
         color: #eee;
         cursor: pointer;
+        width: 120px; /* фиксированный размер кнопок */
     }
 
-    .update-button:hover {
+    .update-button:hover, .delete-button:hover {
         background-color: #444;
     }
 </style>
@@ -88,16 +89,21 @@
     <tbody>
 <!--    method="get"-->
     <tr th:each="user : ${allUsers}">
-        <form th:action="@{/updateInfo}" th:url="updateButton">
-            <input type="hidden" name="userId" th:value="${user.id}"/>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.surname}"></td>
-            <td th:text="${user.department}"></td>
-            <td th:text="${user.salary}"></td>
-            <td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.department}"></td>
+        <td th:text="${user.salary}"></td>
+        <td>
+            <form th:action="@{/updateInfo}" th:url="updateButton">
+                <input type="hidden" name="userId" th:value="${user.id}"/>
                 <input type="submit" class="update-button" value="Изменить" onclick="window.location.href = '${updateButton}'"/>
-            </td>
-        </form>
+            </form>
+            <br>
+            <form th:action="@{/deleteUser}" th:url="deleteButton">
+                <input type="hidden" name="userId" th:value="${user.id}"/>
+                <input type="submit" class="delete-button" value="Удалить" onclick="window.location.href = '${deleteButton}'"/>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

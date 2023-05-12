@@ -15,8 +15,8 @@ public class MyController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public String showAllEmployees(Model model) {
+    @GetMapping("/")
+    public String showAllUsers(Model model) {
 
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("allUsers", allUsers);
@@ -46,5 +46,11 @@ public class MyController {
         model.addAttribute("user", user);
 
         return "user-info";
+    }
+
+    @RequestMapping("/deleteUser")
+    public String deleteUser(@RequestParam("userId") Long id) {
+        userService.deleteUser(id);
+        return "redirect:/";
     }
 }
