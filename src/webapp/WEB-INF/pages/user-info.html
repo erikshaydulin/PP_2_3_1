@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="">
 <head>
     <meta charset="UTF-8">
     <title>Add New User</title>
@@ -56,19 +56,21 @@
             margin: 0 auto;
         }
     </style>
+
 </head>
 <body>
-<h1>Add New User</h1>
+<h1>Окно добавления и изменения пользователя</h1>
 <form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
-    <label for="name">Name:</label>
+    <input type="hidden" th:field="*{id}"/>
+    <label for="name">Имя:</label>
     <input type="text" id="name" th:field="*{name}" required/>
-    <label for="surname">Surname:</label>
+    <label for="surname">Фамилия:</label>
     <input type="text" id="surname" th:field="*{surname}" required/>
-    <label for="department">Department:</label>
+    <label for="department">Департамент:</label>
     <input type="text" id="department" th:field="*{department}" required/>
-    <label for="salary">Salary:</label>
+    <label for="salary">З/П:</label>
     <input type="number" id="salary" th:field="*{salary}" required/>
-    <button type="submit">Add User</button>
+    <button type="submit">Добавить</button>
 </form>
 </body>
 </html>

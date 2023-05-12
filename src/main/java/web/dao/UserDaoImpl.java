@@ -20,7 +20,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public List<User> getAllUsers() {
 
         String query = "SELECT u FROM User u";
@@ -30,9 +29,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void saveUser(User user) {
-        System.out.println(user);
-        entityManager.persist(user);
+        entityManager.merge(user);
+    }
+
+    @Override
+    public User getUser(Long id) {
+        return entityManager.find(User.class, id);
     }
 }
