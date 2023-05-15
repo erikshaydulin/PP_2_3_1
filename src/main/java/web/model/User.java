@@ -1,6 +1,9 @@
 package web.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -11,15 +14,20 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+    @Size(min = 2, message = "Имя должно содержать как минимум 2 символа.")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+$", message = "Имя не должно содержать цифры, пробелы, спецсимволы")
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
+    @Size(min = 2, message = "Фамилия должна содержать как минимум 2 символа.")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+$", message = "Фамилия не должно содержать цифры, пробелы, спецсимволы")
     @Column(name = "surname", nullable = false, length = 50)
     private String surname;
 
     @Column(name = "department")
     private String department;
 
+    @Min(value = 0, message = "Зарплата должна быть не меньше 0")
     @Column(name = "salary")
     private int salary;
 

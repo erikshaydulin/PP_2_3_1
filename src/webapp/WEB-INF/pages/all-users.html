@@ -94,12 +94,12 @@
         <td th:text="${user.department}"></td>
         <td th:text="${user.salary}"></td>
         <td>
-            <form th:action="@{/updateInfo}" th:url="updateButton">
+            <form th:method="PATCH" th:action="@{/updateInfo}" th:url="updateButton">
                 <input type="hidden" name="userId" th:value="${user.id}"/>
                 <input type="submit" class="update-button" value="Изменить" onclick="window.location.href = '${updateButton}'"/>
             </form>
             <br>
-            <form th:action="@{/deleteUser}" th:url="deleteButton">
+            <form  th:method="DELETE" th:action="@{/deleteUser}" th:url="deleteButton">
                 <input type="hidden" name="userId" th:value="${user.id}"/>
                 <input type="submit" class="delete-button" value="Удалить" onclick="window.location.href = '${deleteButton}'"/>
             </form>

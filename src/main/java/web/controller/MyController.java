@@ -3,13 +3,16 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequestMapping()
 public class MyController {
 
     @Autowired
@@ -24,7 +27,7 @@ public class MyController {
         return "all-users";
     }
 
-    @RequestMapping("/addNewUser")
+    @GetMapping("/addNewUser")
     public String addNewUser(Model model) {
 
         model.addAttribute("user", new User());
@@ -33,13 +36,15 @@ public class MyController {
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user) {
-        System.out.println(user);
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "user-info";
+        }
         userService.saveUser(user);
 
         return "redirect:/";
     }
-    @RequestMapping("/updateInfo")
+    @PatchMapping("/updateInfo")
     public String updateUser(@RequestParam("userId") Long id, Model model) {
 
         User user = userService.getUser(id);
@@ -48,7 +53,7 @@ public class MyController {
         return "user-info";
     }
 
-    @RequestMapping("/deleteUser")
+    @DeleteMapping("/deleteUser")
     public String deleteUser(@RequestParam("userId") Long id) {
         userService.deleteUser(id);
         return "redirect:/";

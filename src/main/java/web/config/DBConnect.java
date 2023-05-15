@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.Properties;
 
 
@@ -65,10 +66,12 @@ public class DBConnect {
     }
 
     public Properties getHibernateProperties() {
+
         try {
             Properties properties = new Properties();
             InputStream is = getClass().getClassLoader().getResourceAsStream("db.properties");
             properties.load(is);
+
 
             return properties;
         } catch (IOException e) {
