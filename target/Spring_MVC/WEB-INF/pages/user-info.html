@@ -64,12 +64,15 @@
     <input type="hidden" th:field="*{id}"/>
     <label for="name">Имя:</label>
     <input type="text" id="name" th:field="*{name}" required/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
     <label for="surname">Фамилия:</label>
     <input type="text" id="surname" th:field="*{surname}" required/>
+    <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Name Error</div>
     <label for="department">Департамент:</label>
     <input type="text" id="department" th:field="*{department}" required/>
     <label for="salary">З/П:</label>
     <input type="number" id="salary" th:field="*{salary}" required/>
+    <div style="color:red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">Name Error</div>
     <button type="submit">Добавить</button>
 </form>
 </body>
